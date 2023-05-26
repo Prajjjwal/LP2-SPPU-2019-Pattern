@@ -9,7 +9,7 @@ void printMST(vector<pair<int,int>> adj[], int v){
 
     vector<int> vis(v); // Visited array
     vector<vector<int>> path; //To store and print MST
-
+    int cost = 0;
     pq.push({0,{0,-1}});
 
     while(!pq.empty()){
@@ -21,14 +21,13 @@ void printMST(vector<pair<int,int>> adj[], int v){
         int parent = it.second.second;
 
         if(vis[node]) continue;
-        
         vis[node] = 1;
         if(parent != -1){
             vector<int> tmp(3);
             tmp[0] = parent;
             tmp[1] = node;
             tmp[2] = wt;
-
+            cost += wt;
             path.push_back(tmp);
         }
 
@@ -46,6 +45,7 @@ void printMST(vector<pair<int,int>> adj[], int v){
     for(auto it : path){
         cout <<"\n" <<it[0] << " ------ " << it[2] << " ------> " << it[1];
     }
+    cout << "\n\nCost : " << cost<<endl;
 }
 
 int main(){
@@ -70,6 +70,6 @@ int main(){
     }
 
     printMST(adj,v);
-    
+
     return 0;
 }
